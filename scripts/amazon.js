@@ -1,6 +1,7 @@
 
 import {cart, addToCart } from '../data/cart.js';
 import {products } from '../data/products.js';
+import { formatCurrency } from './utils/money.js';
 
 let productsHTML ='';
 
@@ -25,7 +26,7 @@ products.forEach((product)=>{
           </div>
 
           <div class="product-price">
-            $${(product.priceCents /100).toFixed(2)}          
+            $${formatCurrency(product.priceCents)}          
           </div>
 
           <div class="product-quantity-container">
@@ -58,25 +59,6 @@ products.forEach((product)=>{
 });
 
 
-function addToCart(productId) {
-  let matchingItem;
-
-    cart.forEach((cartItem)=> {
-      if(productId === cartItem.productId){
-        matchingItem= cartItem;
-      }
-    })
-    
-    if (matchingItem){
-      matchingItem.quantity+=1;
-    }
-    else {
-      cart.push({
-        productId: productId,
-        quantity: 1
-      })
-    }
-}
 
     
 function updateCartQuantity() {
